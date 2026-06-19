@@ -30,9 +30,7 @@ export default function SalaryDetailsPanel({
   darkMode = false,
 }: SalaryDetailsPanelProps) {
   // Additional payments state
-  const [payments, setPayments] = useState<AdditionalPayment[]>([
-    { id: "1", name: "Antigüedad / Años de servicio", amount: 250 }
-  ]);
+  const [payments, setPayments] = useState<AdditionalPayment[]>([]);
   const [newPaymentName, setNewPaymentName] = useState("");
   const [newPaymentAmount, setNewPaymentAmount] = useState("");
 
