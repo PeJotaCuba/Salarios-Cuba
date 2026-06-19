@@ -1,0 +1,6 @@
+{
+  "name": "Salarios Cuba",
+  "description": "Calculadora y buscador de la escala salarial del sector presupuestado en Cuba con simulador de impuestos, jornada laboral personalizable y desglose detallado.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
