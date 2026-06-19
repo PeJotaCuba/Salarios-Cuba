@@ -185,7 +185,7 @@ export default function App() {
         {/* Footer */}
         <footer className={`border-t ${darkMode ? "border-slate-900 bg-slate-950/80 text-slate-500" : "border-slate-200 bg-white/80 text-slate-400"} py-5 text-center text-xs mt-auto transition-colors duration-200`}>
           <div className="mx-auto max-w-7xl px-4">
-            <p className="font-medium">© 2026 Salarios Cuba • Consulta legislativa para el sector presupuestado.</p>
+            <p className="font-medium">© 2026 Salarios Cuba • Escala salarial para el sector presupuestado.</p>
           </div>
         </footer>
       </div>

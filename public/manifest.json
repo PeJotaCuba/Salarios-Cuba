@@ -1,0 +1,17 @@
+{
+  "name": "Salarios Cuba",
+  "short_name": "Salarios CU",
+  "description": "Calculadora de la escala salarial del sector presupuestado en Cuba.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#002A8F",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}
