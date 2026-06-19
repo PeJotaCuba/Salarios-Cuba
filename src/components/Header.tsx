@@ -20,7 +20,7 @@ export default function Header({ darkMode, onToggleDarkMode }: HeaderProps) {
           {/* Logo and Brand Title */}
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center">
-              <img src="/icon.svg" alt="Salarios Cuba Logo" className="h-full w-full object-contain drop-shadow-sm" />
+              <img src="/icon.svg?v=2" alt="Salarios Cuba Logo" className="h-full w-full object-contain drop-shadow-sm" />
             </div>
             <div>
               <h1 className="text-xl font-extrabold tracking-tight text-[#002A8F] dark:text-blue-400 uppercase sm:text-2xl flex items-center gap-2">
