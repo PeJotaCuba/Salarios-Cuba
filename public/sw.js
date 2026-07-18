@@ -1,37 +1,21 @@
-const CACHE_NAME = 'salarios-cuba-v2';
+/**
+ * Self-unregistering Service Worker
+ * This clears previous cache intercepts in the development/preview environment
+ * to prevent stale assets and blank screens.
+ */
 
-self.addEventListener('install', (event) => {
+self.addEventListener('install', () => {
   self.skipWaiting();
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll([
-        '/',
-        '/index.html',
-        '/icon.svg',
-        '/manifest.json'
-      ]);
-    })
-  );
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then((keys) => {
       return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
+        keys.map((key) => caches.delete(key))
       );
-    })
-  );
-});
-
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
+    }).then(() => {
+      return self.registration.unregister();
     })
   );
 });

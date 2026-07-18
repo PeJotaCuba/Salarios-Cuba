@@ -6,6 +6,77 @@
 import React, { useState } from "react";
 import { Search, Info, HelpCircle, Trophy, TrendingUp, Layers, MapPin, HeartPulse, GraduationCap, BookOpen, Atom, Palette, Music, FileText, Globe, CheckCircle2, Star, Sparkles } from "lucide-react";
 import { ResolutionData } from "../resolutionsData";
+import { BASE_SALARY_SCALE } from "../salaryData";
+
+// Create a lookup map for groups and their new salaries (44h and 40h)
+const groupSalaryMap = new Map<string, { despues44: number; despues40: number }>();
+BASE_SALARY_SCALE.forEach((group) => {
+  groupSalaryMap.set(group.id, {
+    despues44: group.despues44,
+    despues40: group.despues40,
+  });
+});
+
+// Helper to check if a table already contains both 44h and 40h schedules in its headers
+const tableHasBothSchedules = (columns: string[]) => {
+  let has44 = false;
+  let has40 = false;
+  columns.forEach((col) => {
+    const c = col.toLowerCase();
+    if (c.includes("44h") || c.includes("44 h") || c.includes("cuarenta y cuatro")) has44 = true;
+    if (c.includes("40h") || c.includes("40 h") || c.includes("cuarenta")) has40 = true;
+  });
+  return has44 && has40;
+};
+
+// Helper to render cell contents and automatically append the 44h and 40h salaries 
+// when a complexity group (e.g., "Grupo XXII") is mentioned.
+const renderCellContent = (cellValue: any, skipBadge = false) => {
+  if (cellValue === null || cellValue === undefined) return "";
+  const stringVal = String(cellValue);
+
+  // Match the word "Grupo" followed by Roman numerals I to XXXII
+  const groupRegex = /(Grupo\s+)(XXXII|XXXI|XXX|XXIX|XXVIII|XXVII|XXVI|XXV|XXIV|XXIII|XXII|XXI|XX|XIX|XVIII|XVII|XVI|XV|XIV|XIII|XII|XI|X|IX|VIII|VII|VI|V|IV|III|II|I)\b/gi;
+
+  const foundGroups = new Set<string>();
+  let match;
+  groupRegex.lastIndex = 0;
+
+  while ((match = groupRegex.exec(stringVal)) !== null) {
+    if (match[2]) {
+      foundGroups.add(match[2].toUpperCase());
+    }
+  }
+
+  if (foundGroups.size === 0 || skipBadge) {
+    return <span>{stringVal}</span>;
+  }
+
+  return (
+    <div className="flex flex-col gap-1.5 py-0.5">
+      <span className="font-medium text-slate-800 dark:text-white leading-normal">{stringVal}</span>
+      <div className="flex flex-col gap-1 sm:flex-row sm:flex-wrap">
+        {Array.from(foundGroups).map((groupId) => {
+          const salaryInfo = groupSalaryMap.get(groupId);
+          if (!salaryInfo) return null;
+          
+          return (
+            <div key={groupId} className="inline-flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold tracking-tight">
+              <span className="inline-flex items-center gap-1 rounded-md bg-[#002A8F]/5 dark:bg-blue-500/10 px-1.5 py-0.5 text-[#002A8F] dark:text-blue-400 border border-blue-500/15">
+                <span className="text-[8px] font-normal opacity-70">44h:</span>
+                <span>{salaryInfo.despues44.toLocaleString()} CUP</span>
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/60 px-1.5 py-0.5 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-700/50">
+                <span className="text-[8px] font-normal opacity-70">40h:</span>
+                <span>{salaryInfo.despues40.toLocaleString()} CUP</span>
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 interface ResolutionsPanelProps {
   resolution: ResolutionData;
@@ -103,6 +174,7 @@ export default function ResolutionsPanel({ resolution }: ResolutionsPanelProps) 
           if (section.type === "table" && section.columns && section.rows) {
             const filteredRows = filterRows(section.rows, section.columns);
             const hasHiddenRows = filteredRows.length < section.rows.length;
+            const skipBadge = tableHasBothSchedules(section.columns);
 
             return (
               <div 
@@ -149,7 +221,7 @@ export default function ResolutionsPanel({ resolution }: ResolutionsPanelProps) 
                                   key={cIdx} 
                                   className={`py-3 ${cIdx === 0 ? "pl-5 pr-3 font-semibold text-slate-800 dark:text-white" : "px-3 text-slate-600 dark:text-slate-300"} text-xs`}
                                 >
-                                  {cell}
+                                  {renderCellContent(cell, skipBadge)}
                                 </td>
                               ))}
                             </tr>

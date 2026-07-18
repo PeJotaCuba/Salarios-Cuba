@@ -6,7 +6,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Header from "./components/Header";
 import SearchControls from "./components/SearchControls";
-import SalaryScaleTable from "./components/SalaryScaleTable";
 import SalaryDetailsPanel from "./components/SalaryDetailsPanel";
 import LandingView from "./components/LandingView";
 import ResolutionsPanel from "./components/ResolutionsPanel";
@@ -60,7 +59,16 @@ export default function App() {
   });
 
   // Sidebar navigation and layout states
-  const [currentView, setCurrentView] = useState<string>("landing"); // "landing" | "calculator" | "R12" | "R14" etc.
+  const [currentView, setCurrentView] = useState<string>(() => {
+    try {
+      const stored = localStorage.getItem("salarios_cuba_current_view");
+      return stored || "landing";
+    } catch (e) {
+      console.error("Local storage error on current view load:", e);
+      return "landing";
+    }
+  });
+
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(() => {
     // Default open on desktop, closed on smaller mobile viewports
     if (typeof window !== "undefined") {
@@ -86,6 +94,22 @@ export default function App() {
       console.error("Local storage error on dark mode write:", e);
     }
   }, [darkMode]);
+
+  // Save active view to localStorage to prevent losing page on reload
+  useEffect(() => {
+    try {
+      localStorage.setItem("salarios_cuba_current_view", currentView);
+    } catch (e) {
+      console.error("Local storage error on current view write:", e);
+    }
+  }, [currentView]);
+
+  // Reset window scroll position when changing views
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }, 10);
+  }, [currentView]);
 
   // Adjust sidebar state when window size changes
   useEffect(() => {
@@ -176,15 +200,15 @@ export default function App() {
           onToggleSidebar={handleToggleSidebar} 
         />
 
-        {/* Global Sidebar Overlay Backdrop on Mobile */}
-        {sidebarOpen && (
-          <div 
-            onClick={() => setSidebarOpen(false)}
-            className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-xs lg:hidden transition-opacity"
-          />
-        )}
-
         <div className="flex-1 flex max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pb-12 relative z-10 gap-6">
+          
+          {/* Global Sidebar Overlay Backdrop on Mobile */}
+          {sidebarOpen && (
+            <div 
+              onClick={() => setSidebarOpen(false)}
+              className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-xs lg:hidden transition-opacity"
+            />
+          )}
           
           {/* LEFT SLIDING / COLLAPSIBLE SIDEBAR MENU */}
           <aside className={`fixed lg:relative top-0 bottom-0 left-0 z-50 lg:z-10 w-80 lg:w-64 shrink-0 bg-white dark:bg-slate-900 lg:bg-transparent lg:dark:bg-transparent border-r lg:border-r-0 border-slate-200 dark:border-slate-800 p-5 lg:p-0 flex flex-col transform transition-transform duration-200 ease-out ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:hidden"}`}>
@@ -337,15 +361,6 @@ export default function App() {
                     selectedGroupId={selectedGroupId}
                     selectedHours={selectedHours}
                     onSelectGroupAndHours={handleSelectGroupAndHours}
-                    darkMode={darkMode}
-                  />
-
-                  {/* Full 32 groups grid viewer with clickable rows */}
-                  <SalaryScaleTable
-                    scaledScale={scaledScale}
-                    selectedGroupId={selectedGroupId}
-                    selectedHours={selectedHours}
-                    onSelectGroup={handleSelectGroup}
                     darkMode={darkMode}
                   />
                 </div>

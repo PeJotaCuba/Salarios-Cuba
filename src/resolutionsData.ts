@@ -26,6 +26,103 @@ export interface ResolutionData {
 
 export const RESOLUTIONS_LIST: ResolutionData[] = [
   {
+    id: "R15",
+    title: "Escala Salarial General y Regímenes",
+    subtitle: "Escala unificada de 32 grupos, pagos adicionales por CLA, turnos y maestrías",
+    gaceta: "Resolución 15/2026",
+    iconName: "Layers",
+    color: "blue",
+    summary: "Detalla la escala de 32 grupos de complejidad para regímenes de 44 y 40 horas, la ubicación de las categorías ocupacionales, salarios de recién graduados, y bonificaciones por condiciones anormales, maestrías, doctorados y turnos.",
+    sections: [
+      {
+        title: "Escala Salarial General Única (32 Grupos de Complejidad)",
+        description: "Esta tabla detalla las cuantías básicas de salario mensual fijadas para cada grupo de la escala de complejidad, tanto para la jornada de 44 horas semanales como para la jornada reducida de 40 horas semanales.",
+        type: "table",
+        columns: ["Grupo de Complejidad", "Salario 44h (CUP)", "Salario 40h (CUP)"],
+        rows: [
+          ["Grupo I", "3,210", "2,920"],
+          ["Grupo II", "3,365", "3,060"],
+          ["Grupo III", "3,515", "3,195"],
+          ["Grupo IV", "3,700", "3,365"],
+          ["Grupo V", "3,885", "3,530"],
+          ["Grupo VI", "4,065", "3,695"],
+          ["Grupo VII", "4,295", "3,905"],
+          ["Grupo VIII", "4,525", "4,115"],
+          ["Grupo IX", "4,755", "4,325"],
+          ["Grupo X", "4,985", "4,535"],
+          ["Grupo XI", "5,210", "4,735"],
+          ["Grupo XII", "5,520", "5,020"],
+          ["Grupo XIII", "5,825", "5,295"],
+          ["Grupo XIV", "6,130", "5,575"],
+          ["Grupo XV", "6,435", "5,850"],
+          ["Grupo XVI", "6,740", "6,130"],
+          ["Grupo XVII", "7,045", "6,405"],
+          ["Grupo XVIII", "7,350", "6,685"],
+          ["Grupo XIX", "7,735", "7,035"],
+          ["Grupo XX", "8,115", "7,380"],
+          ["Grupo XXI", "8,500", "7,730"],
+          ["Grupo XXII", "8,880", "8,075"],
+          ["Grupo XXIII", "9,265", "8,425"],
+          ["Grupo XXIV", "9,645", "8,770"],
+          ["Grupo XXV", "10,105", "9,190"],
+          ["Grupo XXVI", "10,640", "9,675"],
+          ["Grupo XXVII", "11,175", "10,160"],
+          ["Grupo XXVIII", "11,710", "10,645"],
+          ["Grupo XXIX", "12,245", "11,135"],
+          ["Grupo XXX", "13,010", "11,830"],
+          ["Grupo XXXI", "13,770", "12,520"],
+          ["Grupo XXXII", "14,535", "13,215"]
+        ]
+      },
+      {
+        title: "Ubicación de Categorías Ocupacionales en la Escala",
+        type: "table",
+        columns: ["Categoría Ocupacional", "Ubicación en Grupos de Complejidad"],
+        rows: [
+          ["Trabajadores de Servicios", "Desde Grupo I hasta Grupo VI inclusive"],
+          ["Operarios", "Desde Grupo II hasta Grupo VIII inclusive"],
+          ["Trabajadores Administrativos", "Desde Grupo III hasta Grupo VII inclusive"],
+          ["Personal Técnico", "Desde Grupo VII hasta Grupo XXV inclusive"],
+          ["Cuadros de Dirección", "Desde Grupo XVII hasta Grupo XXII inclusive"]
+        ]
+      },
+      {
+        title: "Salarios para Recién Graduados en Período de Servicio Social (Sin Ocupar Cargo)",
+        type: "table",
+        columns: ["Nivel de Escolaridad", "Grupo Asignado", "Salario 44h (CUP)", "Salario 40h (CUP)"],
+        rows: [
+          ["Nivel Medio Superior", "Grupo VII", "4,295", "3,905"],
+          ["Nivel Técnico Superior", "Grupo XII", "5,520", "5,020"],
+          ["Nivel Superior (Universitario)", "Grupo XIII", "5,825", "5,295"]
+        ]
+      },
+      {
+        title: "Pagos Adicionales Mensuales de Aplicación General",
+        type: "bulletList",
+        bullets: [
+          "Por ostentar categoría de Máster o Especialidad equivalente (siempre que se desempeñe un cargo que exija nivel superior): 440 pesos mensuales.",
+          "Por ostentar grado científico de Doctor (siempre que se desempeñe un cargo que exija nivel superior): 825 pesos mensuales.",
+          "Por condiciones laborales anormales (CLA) según exposición por hora: Grupo I (0.60 CUP), Grupo II (1.15 CUP), Grupo III (1.75 CUP), Grupo IV (2.30 CUP), Grupo V (2.90 CUP).",
+          "Por laborar en Turnos Nocturnos (tarifa peso/hora): De 7:00 PM a 11:00 PM (0.60 CUP), de 11:00 PM a 7:00 AM (1.15 CUP).",
+          "Coeficiente de interés económico-social del 30% del salario básico para trabajadores que laboran en el municipio de Caimanera (Guantánamo).",
+          "Para profesionales certificados internacionalmente: 685 pesos mensuales."
+        ]
+      },
+      {
+        title: "Grupos de Complejidad para Cargos Específicos de Soporte",
+        type: "table",
+        columns: ["Cargo", "Nivel / Clasificación", "Grupo de Complejidad Asignado"],
+        rows: [
+          ["Secretaria Ejecutiva", "Asiste a Directivos Superiores", "Grupo XI"],
+          ["Secretaria Ejecutiva", "Asiste a Directivos y Ejecutivos", "Grupo X"],
+          ["Encargado de Almacén", "Clasificación de Almacén A", "Grupo VII"],
+          ["Encargado de Almacén", "Clasificación de Almacén B", "Grupo VI"],
+          ["Encargado de Almacén", "Clasificación de Almacén C", "Grupo V"]
+        ]
+      }
+    ]
+  },
+  {
     id: "R12",
     title: "Deporte de Alto Rendimiento y Béisbol",
     subtitle: "Ingresos básicos de atletas, Serie Nacional de Béisbol y Liga Élite",
@@ -114,63 +211,6 @@ export const RESOLUTIONS_LIST: ResolutionData[] = [
           "Aplica obligatoriamente a todas las entidades del sector presupuestado cubano.",
           "Sustituye el antiguo sueldo mínimo de 2,100 CUP, lo que representa un aumento directo del 52.8% en la base.",
           "Establece una base superior que rediseña toda la escala salarial del país en busca de proteger el poder adquisitivo frente a las transformaciones económicas."
-        ]
-      }
-    ]
-  },
-  {
-    id: "R15",
-    title: "Escala Salarial General y Regímenes",
-    subtitle: "Escala unificada de 32 grupos, pagos adicionales por CLA, turnos y maestrías",
-    gaceta: "Resolución 15/2026",
-    iconName: "Layers",
-    color: "blue",
-    summary: "Detalla la escala de 32 grupos de complejidad para regímenes de 44 y 40 horas, la ubicación de las categorías ocupacionales, salarios de recién graduados, y bonificaciones por condiciones anormales, maestrías, doctorados y turnos.",
-    sections: [
-      {
-        title: "Ubicación de Categorías Ocupacionales en la Escala",
-        type: "table",
-        columns: ["Categoría Ocupacional", "Ubicación en Grupos de Complejidad"],
-        rows: [
-          ["Trabajadores de Servicios", "Desde Grupo I hasta Grupo VI inclusive"],
-          ["Operarios", "Desde Grupo II hasta Grupo VIII inclusive"],
-          ["Trabajadores Administrativos", "Desde Grupo III hasta Grupo VII inclusive"],
-          ["Personal Técnico", "Desde Grupo VII hasta Grupo XXV inclusive"],
-          ["Cuadros de Dirección", "Desde Grupo XVII hasta Grupo XXII inclusive"]
-        ]
-      },
-      {
-        title: "Salarios para Recién Graduados en Período de Servicio Social (Sin Ocupar Cargo)",
-        type: "table",
-        columns: ["Nivel de Escolaridad", "Grupo Asignado", "Salario 44h (CUP)", "Salario 40h (CUP)"],
-        rows: [
-          ["Nivel Medio Superior", "Grupo VII", "4,295", "3,905"],
-          ["Nivel Técnico Superior", "Grupo XII", "5,520", "5,020"],
-          ["Nivel Superior (Universitario)", "Grupo XIII", "5,825", "5,295"]
-        ]
-      },
-      {
-        title: "Pagos Adicionales Mensuales de Aplicación General",
-        type: "bulletList",
-        bullets: [
-          "Por ostentar categoría de Máster o Especialidad equivalente (siempre que se desempeñe un cargo que exija nivel superior): 440 pesos mensuales.",
-          "Por ostentar grado científico de Doctor (siempre que se desempeñe un cargo que exija nivel superior): 825 pesos mensuales.",
-          "Por condiciones laborales anormales (CLA) según exposición por hora: Grupo I (0.60 CUP), Grupo II (1.15 CUP), Grupo III (1.75 CUP), Grupo IV (2.30 CUP), Grupo V (2.90 CUP).",
-          "Por laborar en Turnos Nocturnos (tarifa peso/hora): De 7:00 PM a 11:00 PM (0.60 CUP), de 11:00 PM a 7:00 AM (1.15 CUP).",
-          "Coeficiente de interés económico-social del 30% del salario básico para trabajadores que laboran en el municipio de Caimanera (Guantánamo).",
-          "Para profesionales certificados internacionalmente: 685 pesos mensuales."
-        ]
-      },
-      {
-        title: "Grupos de Complejidad para Cargos Específicos de Soporte",
-        type: "table",
-        columns: ["Cargo", "Nivel / Clasificación", "Grupo de Complejidad Asignado"],
-        rows: [
-          ["Secretaria Ejecutiva", "Asiste a Directivos Superiores", "Grupo XI"],
-          ["Secretaria Ejecutiva", "Asiste a Directivos y Ejecutivos", "Grupo X"],
-          ["Encargado de Almacén", "Clasificación de Almacén A", "Grupo VII"],
-          ["Encargado de Almacén", "Clasificación de Almacén B", "Grupo VI"],
-          ["Encargado de Almacén", "Clasificación de Almacén C", "Grupo V"]
         ]
       }
     ]
