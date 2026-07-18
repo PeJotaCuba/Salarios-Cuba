@@ -4,21 +4,32 @@
  */
 
 import React from "react";
-import { Sun, Moon, Landmark } from "lucide-react";
+import { Sun, Moon, Landmark, Menu } from "lucide-react";
 
 interface HeaderProps {
   darkMode: boolean;
   onToggleDarkMode: () => void;
+  onToggleSidebar: () => void;
 }
 
-export default function Header({ darkMode, onToggleDarkMode }: HeaderProps) {
+export default function Header({ darkMode, onToggleDarkMode, onToggleSidebar }: HeaderProps) {
   return (
     <header className="mb-6 border-b border-light-border dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/60 backdrop-blur-md pb-4 pt-4 shadow-xs transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-stretch justify-between gap-4 sm:flex-row sm:items-center">
           
-          {/* Logo and Brand Title */}
+          {/* Logo, Sidebar Toggle and Brand Title */}
           <div className="flex items-center gap-3">
+            <button
+              id="sidebar-toggle"
+              type="button"
+              onClick={onToggleSidebar}
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-[#002A8F] dark:text-blue-400 border border-slate-200 dark:border-slate-700 cursor-pointer transition-all shadow-xs"
+              title="Menú de Resoluciones y Calculador"
+              aria-label="Toggle sidebar"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
             <div className="flex h-12 w-12 shrink-0 items-center justify-center">
               <img src="/icon.svg?v=2" alt="Salarios Cuba Logo" className="h-full w-full object-contain drop-shadow-sm" />
             </div>
