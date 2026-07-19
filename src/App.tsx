@@ -9,6 +9,7 @@ import SearchControls from "./components/SearchControls";
 import SalaryDetailsPanel from "./components/SalaryDetailsPanel";
 import LandingView from "./components/LandingView";
 import ResolutionsPanel from "./components/ResolutionsPanel";
+import VisitorCounter from "./components/VisitorCounter";
 import { BASE_SALARY_SCALE } from "./salaryData";
 import { RESOLUTIONS_LIST } from "./resolutionsData";
 import { 
@@ -27,7 +28,8 @@ import {
   Palette, 
   Music, 
   FileText, 
-  Globe 
+  Globe,
+  Download
 } from "lucide-react";
 
 // Map string icon names to Lucide icon components for the sidebar navigation
@@ -107,7 +109,7 @@ export default function App() {
   // Reset window scroll position when changing views
   useEffect(() => {
     setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
     }, 10);
   }, [currentView]);
 
@@ -285,9 +287,19 @@ export default function App() {
 
             </div>
 
-            {/* Respectful mini credit */}
-            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 text-[10px] text-slate-400 dark:text-slate-600 font-medium">
-              Gaceta Oficial No. 60 Ordinaria
+            {/* Respectful mini credit and Download Button */}
+            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-4">
+              <a 
+                href="/gaceta_60.pdf"
+                download="Gaceta_Oficial_60.pdf"
+                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 rounded-xl text-xs font-bold transition-all shadow-sm cursor-pointer"
+              >
+                <Download className="h-4 w-4" />
+                Descargar Gaceta Completa
+              </a>
+              <div className="text-[10px] text-slate-400 dark:text-slate-600 font-medium text-center">
+                Gaceta Oficial No. 60 Ordinaria
+              </div>
             </div>
           </aside>
 
@@ -387,6 +399,8 @@ export default function App() {
           </main>
 
         </div>
+
+        <VisitorCounter darkMode={darkMode} currentView={currentView} />
 
         {/* Footer */}
         <footer className={`border-t ${darkMode ? "border-slate-900 bg-slate-950/80 text-slate-500" : "border-slate-200 bg-white/80 text-slate-400"} py-5 text-center text-xs mt-auto transition-colors duration-200`}>
