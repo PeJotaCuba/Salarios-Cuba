@@ -284,8 +284,10 @@ export default function App() {
                   
                   <div className="pt-2 mt-2">
                     <a 
-                      href="/gaceta_60.pdf"
+                      href="https://raw.githubusercontent.com/PeJotaCuba/Bases-de-datos-CMNL/fce579d674d4fce36a9982f6e1b7b103c9442a6b/goc-2026-o60.pdf"
                       download="Gaceta_Oficial_60.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-full flex items-center justify-center gap-2 px-3 py-2.5 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 rounded-xl text-[11px] font-bold transition-all shadow-sm cursor-pointer"
                     >
                       <Download className="h-3.5 w-3.5" />
